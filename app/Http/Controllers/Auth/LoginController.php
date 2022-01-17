@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,19 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+    public function redirectTo()
+    {
+        if (Auth::user()->id_role == 1) {
+            return 'dashboard';
+        } elseif (Auth::user()->id_role == 2) {
+            return '/home';
+        } else {
+            Auth::logout();
+            Session::flash('status', 'Akun anda belum terdaftar dalam sistem ini');
+            return 'login';
+        }
+    }
 
     /**
      * Create a new controller instance.

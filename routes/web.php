@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false
+]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('Admin')->middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    //user
+    Route::resource('user', 'UserController');
+    Route::patch('/reset-password/{id}', 'UserController@reset_password')->name('reset-password');
+});
