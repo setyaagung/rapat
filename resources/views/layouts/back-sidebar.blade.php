@@ -24,13 +24,21 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - user -->
+    <li class="nav-item {{ (request()->segment(1) == 'pegawai') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pegawai.index') }}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pegawai</span>
+        </a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - user -->
     <li class="nav-item {{ (request()->segment(1) == 'user') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('user.index') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>Kelola Pengguna</span>
         </a>
     </li>
-
 
     <hr class="sidebar-divider">
 

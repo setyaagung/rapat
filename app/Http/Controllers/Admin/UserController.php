@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('backend.user.index', compact('users'));
     }
 
     /**
@@ -24,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.user.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = [
+            'email.unique' => 'Maaf, Email ini sudah digunakan user lain'
+        ];
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ], $message);
+        $data = $request->all();
+        $data['password'] = bcrypt($request->input('password'));
+        $data['id_role'] = 1;
+        User::create($data);
+        return redirect()->route('user.index')->with('create', 'Data user berhasil ditambahkan');
     }
 
     /**
@@ -46,7 +60,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('backend.user.reset-password', compact('user'));
     }
 
     /**
@@ -57,7 +72,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('backend.user.edit', compact('user'));
     }
 
     /**
@@ -69,7 +85,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $message = [
+            'email.unique' => 'Maaf, Email ini sudah digunakan user lain'
+        ];
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id_user . ',id_user',
+        ], $message);
+        $data = $request->all();
+        $user->update($data);
+        return redirect()->route('user.index')->with('update', 'Data user berhasil diperbarui');
     }
 
     /**
@@ -80,6 +106,21 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('user.index')->with('delete', 'Data user berhasil dihapus');
+    }
+
+    public function reset_password(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        //$data = $request->all();
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+        return redirect()->route('user.index')->with('update', 'Password berhasil direset');
     }
 }
