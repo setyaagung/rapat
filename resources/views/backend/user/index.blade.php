@@ -58,7 +58,9 @@
                                             <td>{{ strtoupper($user->role->nama_role)}}</td>
                                             <td>
                                                 <a href="{{ route('user.show',$user->id_user)}}" class="btn btn-sm btn-success"><i class="fas fa-cog"></i> Reset Password</a>
-                                                <a href="{{ route('user.edit',$user->id_user)}}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                @if ($user->id_role == 1)
+                                                    <a href="{{ route('user.edit',$user->id_user)}}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                @endif
                                                 <form action="{{ route('user.destroy', $user->id_user)}}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')

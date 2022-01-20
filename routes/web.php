@@ -26,6 +26,8 @@ Route::namespace('Admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     //pegawai
     Route::resource('pegawai', 'PegawaiController');
+    //penyelenggara
+    Route::resource('penyelenggara', 'PenyelenggaraController');
     //user
     Route::resource('user', 'UserController');
     Route::patch('/reset-password/{id}', 'UserController@reset_password')->name('reset-password');

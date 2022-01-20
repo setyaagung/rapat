@@ -1,6 +1,6 @@
 @extends('layouts.back-main')
 
-@section('title', 'Data Pegawai')
+@section('title', 'Penyelenggara')
 
 @section('content')
     <div class="container-fluid">
@@ -8,9 +8,9 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Data Pegawai</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Penyelenggara</h6>
                         <div class="float-right">
-                            <a href="{{ route('pegawai.create')}}" class="btn btn-sm btn-primary">Tambah</a>
+                            <a href="{{ route('penyelenggara.create')}}" class="btn btn-sm btn-primary">Tambah</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -43,26 +43,18 @@
                                 <thead>
                                     <tr>
                                         <th>NO</th>
-                                        <th>NIP</th>
-                                        <th>NAMA</th>
-                                        <th>JENIS KELAMIN</th>
-                                        <th>NO TELP</th>
-                                        <th>ALAMAT</th>
+                                        <th>NAMA PENYELENGGARA</th>
                                         <th>AKSI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pegawais as $pegawai)
+                                    @foreach ($penyelenggaras as $penyelenggara)
                                         <tr>
                                             <td>{{ $loop->iteration}}</td>
-                                            <td>{{ $pegawai->nip}}</td>
-                                            <td>{{ $pegawai->nama_pegawai}}</td>
-                                            <td>{{ $pegawai->jenis_kelamin}}</td>
-                                            <td>+62{{ $pegawai->no_telp}}</td>
-                                            <td>{{ $pegawai->alamat}}</td>
+                                            <td>{{ $penyelenggara->nama_penyelenggara}}</td>
                                             <td>
-                                                <a href="{{ route('pegawai.edit',$pegawai->id_pegawai)}}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <form action="{{ route('pegawai.destroy', $pegawai->id_pegawai)}}" method="POST" class="d-inline">
+                                                <a href="{{ route('penyelenggara.edit',$penyelenggara->id_penyelenggara)}}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <form action="{{ route('penyelenggara.destroy', $penyelenggara->id_penyelenggara)}}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini??')"><i class="fas fa-trash"></i> Hapus</button>

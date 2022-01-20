@@ -33,6 +33,15 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - user -->
+    <li class="nav-item {{ (request()->segment(1) == 'penyelenggara') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('penyelenggara.index') }}">
+            <i class="fas fa-fw fa-building"></i>
+            <span>Penyelenggara</span>
+        </a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - user -->
     <li class="nav-item {{ (request()->segment(1) == 'user') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('user.index') }}">
             <i class="fas fa-fw fa-user"></i>

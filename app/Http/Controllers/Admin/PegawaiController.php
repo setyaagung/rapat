@@ -108,14 +108,13 @@ class PegawaiController extends Controller
         ];
         $request->validate([
             'nama_pegawai' => 'required|string|max:255',
-            'nip' => 'required|string|max:255|unique:pegawai,nip,' . $pegawai->id_pegawai . ',id_dosen',
+            'nip' => 'required|string|max:255|unique:pegawai,nip,' . $pegawai->id_pegawai . ',id_pegawai',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id_user . ',id_user',
-            'password' => 'required|string|min:8|confirmed',
         ], $message);
         $data = $request->all();
         $pegawai->update($data);
         $user->update([
-            'nama' => $request->input('nama_pegawai'),
+            'nama' => $pegawai->nama_pegawai,
             'email' => $request->input('email'),
         ]);
         return redirect()->route('pegawai.index')->with('update', 'Data pegawai berhasil diperbarui');
@@ -130,7 +129,9 @@ class PegawaiController extends Controller
     public function destroy($id)
     {
         $pegawai = Pegawai::findOrFail($id);
+        $user = User::where('id_user', $pegawai->id_user)->first();
         $pegawai->delete();
+        $user->delete();
         return redirect()->route('pegawai.index')->with('delete', 'Data pegawai berhasil dihapus');
     }
 }
