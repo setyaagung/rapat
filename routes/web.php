@@ -28,6 +28,8 @@ Route::namespace('Admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('pegawai', 'PegawaiController');
     //penyelenggara
     Route::resource('penyelenggara', 'PenyelenggaraController');
+    //rapat
+    Route::resource('rapat', 'RapatController');
     //user
     Route::resource('user', 'UserController');
     Route::patch('/reset-password/{id}', 'UserController@reset_password')->name('reset-password');

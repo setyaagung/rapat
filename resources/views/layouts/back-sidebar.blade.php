@@ -42,6 +42,15 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - user -->
+    <li class="nav-item {{ (request()->segment(1) == 'rapat') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('rapat.index') }}">
+            <i class="fas fa-fw fa-handshake"></i>
+            <span>Rapat</span>
+        </a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - user -->
     <li class="nav-item {{ (request()->segment(1) == 'user') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('user.index') }}">
             <i class="fas fa-fw fa-user"></i>
