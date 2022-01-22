@@ -30,6 +30,10 @@ Route::namespace('Admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('penyelenggara', 'PenyelenggaraController');
     //rapat
     Route::resource('rapat', 'RapatController');
+    //laporan
+    Route::get('/laporan', 'LaporanController@index')->name('laporan');
+    Route::get('/laporan/filter', 'LaporanController@filter')->name('laporan.filter');
+    Route::get('/laporan/print/dari={dari}/sampai={sampai}', 'LaporanController@print')->name('laporan.print');
     //user
     Route::resource('user', 'UserController');
     Route::patch('/reset-password/{id}', 'UserController@reset_password')->name('reset-password');
