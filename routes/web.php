@@ -21,6 +21,8 @@ Auth::routes([
 ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/agenda-rapat', 'AgendaRapatController@index')->name('agenda-rapat');
+Route::get('/agenda-rapat/detail/{id}', 'AgendaRapatController@detail')->name('agenda-rapat.detail');
 
 Route::namespace('Admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

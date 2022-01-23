@@ -14,4 +14,9 @@ class PesertaRapat extends Model
     {
         return $this->belongsTo(Pegawai::class, 'id_pegawai');
     }
+
+    public function rapat()
+    {
+        return $this->belongsTo(Rapat::class, 'id_rapat');
+    }
 }

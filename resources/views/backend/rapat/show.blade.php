@@ -39,7 +39,7 @@
                                 </tr>
                             </table>
                             <h5 class="text-center font-weight-bold">Data Peserta</h5>
-                            <table class="table table-bordered table-striped">
+                            <table id="dataTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
