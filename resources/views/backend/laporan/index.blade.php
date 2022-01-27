@@ -1,6 +1,6 @@
 @extends('layouts.back-main')
 
-@section('title', 'Data Rapat')
+@section('title', 'Laporan Rapat')
 
 @section('content')
     <div class="container-fluid">
